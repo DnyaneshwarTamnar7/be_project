@@ -3,11 +3,14 @@ import datetime #datetime module
 import bcrypt   #importing hashing algorithm
 import mysql.connector  #mysql connector
 from fpdf import FPDF
+# from flask_login import LoginManager
 
 
 app=Flask(__name__) #initializing flask
 pdf=FPDF()
 salt=bcrypt.gensalt()   #salt generated for hashing
+# login_manager=LoginManager()    #login manager initialized
+# login_manager.init_app(app)
 connection=mysql.connector.connect(host='localhost',database='DASS',user='root',password='4267')    #MySQL connection
 cursor=connection.cursor()
 app.secret_key="lmk"  #session secret key

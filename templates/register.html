@@ -20,7 +20,7 @@
       {%endwith%}
       </div>
     
-    <form action="/register" method="post">
+    <form action="/register" method="post" id="register">
       <div class="container">
         <h1>Register</h1>
         <label for="name">Patient Name</label><br>
@@ -28,13 +28,13 @@
        <!-- <label for="Birth Date">Patient Birth Date</label><br>
         <input type="date" placeholder="dd/mm/yyyy" name="Birth-Date" required>-->
         <label for="age">Patient Age</label><br>
-        <input type="number" placeholder="Patient Age" name="age" required>
+        <input type="number" placeholder="Patient Age" id="age" name="age" required>
         <label for="email">Patient E-mail</label><br>
-        <input type="email" class="input-validate" placeholder="Patient E-mail" name="email" required>
+        <input type="email" class="input-validate" id="email" placeholder="Patient E-mail" name="email" required>
         <label for="mobile" >Patient mobile</label><br>
         <input type="text" min="10" max="10" placeholder="Patient mobile" name="mobile" required>
         <label for="password">Password</label><br>
-        <input type="password" class="input-validate" min="8" placeholder="Patient password" name="password" required>
+        <input type="password" class="input-validate" min="8" id="password" placeholder="Patient password" name="password" required>
         <label for="security">Security Questions</label>
         <select name="security" id="security" class="input-validate">
           <option>Choose Your Question?</option>
