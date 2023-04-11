@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&amp;family=Cinzel:wght@500&amp;family=Roboto:wght@300&amp;family=Poppins:wght@500;600;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Registration Page</title>
+  
+  </head>
+  <body>
+    <div class="msg">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <p id="flash-msg">{{message}}</p>
+      {%endfor%}
+      {%endif%}
+      {%endwith%}
+      </div>
+    
+    <form action="/register" method="post">
+      <div class="container">
+        <h1>Register</h1>
+        <label for="name">Patient Name</label><br>
+        <input type="text" id="name" placeholder="Patient Name" name="name" required>
+       <!-- <label for="Birth Date">Patient Birth Date</label><br>
+        <input type="date" placeholder="dd/mm/yyyy" name="Birth-Date" required>-->
+        <label for="age">Patient Age</label><br>
+        <input type="number" placeholder="Patient Age" name="age" required>
+        <label for="email">Patient E-mail</label><br>
+        <input type="email" class="input-validate" placeholder="Patient E-mail" name="email" required>
+        <label for="mobile" >Patient mobile</label><br>
+        <input type="text" min="10" max="10" placeholder="Patient mobile" name="mobile" required>
+        <label for="password">Password</label><br>
+        <input type="password" class="input-validate" min="8" placeholder="Patient password" name="password" required>
+        <label for="security">Security Questions</label>
+        <select name="security" id="security" class="input-validate">
+          <option>Choose Your Question?</option>
+          <option value="what was your childhood nickname?">what was your childhood nickname?</option>
+          <option value="what was the last name of your third grade teacher?">what was the last name of your third grade teacher?</option>
+          <option value="In what city does your nearest sibling live?">In what city does your nearest sibling live?</option>
+        </select>
+        <label for="sec-ans">Answer for security Question?</label>
+        <input type="text" id="sec-ans" class="input-validate" name="sec-ans">
+        <button type="submit" id="submit">Register</button>
+        <div class="existing-user">
+          <p>Already have an account? <a href="/log">Login here</a></p>
+        </div>
+      </div>
+    </form>
+    
+    <script src="{{url_for('static', filename='js/')}}"></script>
+  </body>
+</html>

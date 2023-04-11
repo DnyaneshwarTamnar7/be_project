@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <form action="/register" method="post">
+        <div>
+            <label for="name">Patient Name</label><br>
+            <input type="text" id="name" placeholder="Patient Name" name="name" required>
+        </div>
+        <div>
+            <label for="Birth Date">Patient Birth Date</label><br>
+            <input type="text" placeholder="dd/mm/yyyy" name="Birth-Date" required>
+        </div>
+        <div>
+            <label for="age">Patient Age</label><br>
+            <input type="number" placeholder="Patient Age" name="age" required>
+        </div>
+        <div>
+            <label for="email">Patient E-mail</label><br>
+            <input type="email" placeholder="Patient E-mail" name="email" required>
+        </div>
+        <div>
+            <label for="mobile">Patient mobile</label><br>
+            <input type="text" placeholder="Patient mobile" name="mobile" required>
+        </div>
+        <div>
+            <label for="password">Password</label><br>
+            <input type="password" placeholder="Patient password" name="password" required>
+        </div>
+        <div>
+            <a href="/log">Login</a>
+            <button>Register</button>
+        </div>
+    </form>
+    
+</body>
+</html>

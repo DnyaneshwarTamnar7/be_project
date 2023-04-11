@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&amp;family=Cinzel:wght@500&amp;family=Roboto:wght@300&amp;family=Poppins:wght@500;600;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="msg">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p id="flash-msg">{{message}}</p>
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+    </div>
+    <form action="/forg-paswd" method="post">
+      <div class="container">
+        <h1>Forget Password</h1>
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" name="email" required>
+        <label for="security">Security Questions</label>
+        <select name="security" id="security" class="input-validate">
+          <option>Choose Your Question?</option>
+          <option value="what was your childhood nickname?">what was your childhood nickname?</option>
+          <option value="what was the last name of your third grade teacher?">what was the last name of your third grade teacher?</option>
+          <option value="In what city does your nearest sibling live?">In what city does your nearest sibling live?</option>
+        </select><br>
+        <label for="sec-ans">Answer for security Question?</label>
+        <input type="text" id="sec-ans" class="input-validate" name="sec-ans">
+        <label for="password"><b>Enter New Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+        <button type="submit">Update Password</button>
+        <div class="new-user">
+          <p>New user? <a href="/">Register here</a></p>
+        </div>
+        <div class="new-user">
+          <p><a href="/">Forgot Password</a></p>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    
+        <!-- style.css  -->
+        <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- fontawesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+    crossorigin="anonymous" />
+        
+    
+        <title>DASS Profile</title>
+    </head>
+    
+    <body>
+      <section class="header_menu" id="header_menu">
+        <div class="container-fluid px-0 shadow">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light py-3  ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/results">Results</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/<%=user._id%>/orders">Orders</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/<%=user._id%>/about">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/<%=user._id%>/contact">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Log out</a>
+                </li>
+              </ul>
+              <div class="userpro">
+                <a href="/profile"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+                
+              </div>
+             
+            </div>
+          </nav>
+        </div>
+      </section>
+      <!-- ==============header menu section ends here============== -->
+            <div class="msg">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <p id="flash-msg">{{message}}</p>
+            {%endfor%}
+            {%endif%}
+            {%endwith%}
+            </div>
+        <form action="/profile_update" method="post">
+            <div class="container">
+              <h1>Register</h1>
+              <label for="name">Patient Name</label><br>
+              <input type="text" id="name" placeholder="Patient Name" name="name" value="{{records[0]}}" required>
+            <!--  <label for="Birth Date">Patient Birth Date</label><br>
+              <input type="text" placeholder="dd/mm/yyyy" name="Birth-Date" value="{{records[1]}}" required>-->
+              <label for="age">Patient Age</label><br>
+              <input type="number" placeholder="Patient Age" name="age" value="{{records[1]}}" required>
+              <label for="email">Patient E-mail</label><br>
+              <input type="email" class="input-validate" placeholder="Patient E-mail" name="email" value="{{records[2]}}" required>
+              <label for="mobile" >Patient mobile</label><br>
+              <input type="text" min="10" max="10" placeholder="Patient mobile" name="mobile" value="{{records[3]}}" required>
+              
+              <button type="submit" id="submit"><div class="existing-user">
+                <p><a href="/profile_update">Update</a></p>
+              </div></button>
+              
+            </div>
+          </form>
+    </body>
+    
+    </html>
