@@ -14,63 +14,86 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
     integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
     crossorigin="anonymous" />
-        
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&amp;family=Cinzel:wght@500&amp;family=Roboto:wght@300&amp;family=Poppins:wght@500;600;800&amp;display=swap" rel="stylesheet">
+
+        <!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}"> -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link
+    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    rel="stylesheet"
+  />
         <title>DASS Profile</title>
     </head>
     
     <body>
-      <section class="header_menu" id="header_menu">
-        <div class="container-fluid px-0 shadow">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light py-3  ">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mx-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/results">Results</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/user/<%=user._id%>/orders">Orders</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/user/<%=user._id%>/about">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/user/<%=user._id%>/contact">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/logout">Log out</a>
-                </li>
-              </ul>
-              <div class="userpro">
-                <a href="/profile"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
-                
-              </div>
-             
-            </div>
-          </nav>
+      <section class="sidebar">
+        <div class="nav-header">
+          <p class="logo">Welcome</p>
+          <i class="bx bx-menu-alt-right btn-menu"></i>
         </div>
+        <ul class="nav-links">
+          <li>
+            <a href="/profile">
+              <i class='bx bx-user'></i></i>
+              <span class="title">Profile</span>
+            </a>
+            <span class="tooltip">Profile</span>
+          </li>
+          <li>
+            <a href="/home">
+              <i class="bx bx-home-alt-2"></i>
+              <span class="title">Home</span>
+            </a>
+            <span class="tooltip">Home</span>
+          </li>
+          <li>
+            <a href="/results">
+              <i class='bx bx-history'></i>          
+              <span class="title">Past Results</span>
+            </a>
+            <span class="tooltip">Results</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-info-circle'></i>
+              <span class="title">About Us</span>
+            </a>
+            <span class="tooltip">Abouts</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bx bx-phone-call"></i>
+              <span class="title">Contact Us</span>
+            </a>
+            <span class="tooltip">Contact Us</span>
+          </li>
+      
+          <li>
+            <a href="/logout">
+              <i class='bx bx-log-out'></i>
+              <span class="title">Log out</span>
+            </a>
+            <span class="tooltip">Log out</span>
+          </li>
+          
+        </ul>
+       
       </section>
       <!-- ==============header menu section ends here============== -->
-            <div class="msg">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            {% for message in messages %}
-            <p id="flash-msg">{{message}}</p>
-            {%endfor%}
-            {%endif%}
-            {%endwith%}
-            </div>
+         
         <form action="/profile_update" method="post">
             <div class="container">
               <h1>Register</h1>
+              <div class="msg">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p id="flash-msg">{{message}}</p>
+                {%endfor%}
+                {%endif%}
+                {%endwith%}
+                </div>
+             
               <label for="name">Patient Name</label><br>
               <input type="text" id="name" placeholder="Patient Name" name="name" value="{{records[0]}}" required>
             <!--  <label for="Birth Date">Patient Birth Date</label><br>
@@ -82,12 +105,30 @@
               <label for="mobile" >Patient mobile</label><br>
               <input type="text" min="10" max="10" placeholder="Patient mobile" name="mobile" value="{{records[3]}}" required>
               
-              <button type="submit" id="submit"><div class="existing-user">
-                <p><a href="/profile_update">Update</a></p>
-              </div></button>
+              <button type="submit" id="submit" a href="/profile_update" class="existing-user">
+                Update</a>
+              </button>
               
             </div>
           </form>
+
+          <script>
+            const btn_menu = document.querySelector(".btn-menu");
+            const side_bar = document.querySelector(".sidebar");
+      
+            btn_menu.addEventListener("click", function () {
+              side_bar.classList.toggle("expand");
+              changebtn();
+            });
+      
+            function changebtn() {
+              if (side_bar.classList.contains("expand")) {
+                btn_menu.classList.replace("bx-menu", "bx-menu-alt-right");
+              } else {
+                btn_menu.classList.replace("bx-menu-alt-right", "bx-menu");
+              }
+            }
+          </script>
     </body>
     
     </html>

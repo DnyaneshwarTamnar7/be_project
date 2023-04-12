@@ -49,15 +49,20 @@ def login():
 
 @app.route("/") #registeration route for rendering registration page
 def regist():
-    return render_template('register.html')
+    return render_template('land_page.html')
 
 @app.route("/home") #home route for rendering the home page
 def home():
     if 'strs-res' in session:
         stress=session['strs-res']
-        return render_template('home.html',stress=stress)
+        depression=session['depr-res']
+        anxiety=session['anx-res']
+        return render_template('home.html',stress=stress,depression=depression,anxiety=anxiety)
     else:
         return render_template('home.html')
+@app.route("/new-register") #registeration route for rendering registration page
+def new_register():
+    return render_template('register.html')
 
 @app.route("/register",methods=['post'])    #registration route for registring the new user 
 def register():
@@ -125,13 +130,13 @@ def que1():
 @app.route("/stress",methods=['post'])  #stress test result sotring and displaying
 def stress():
     if 'Email' in session:
-        from models.stress import result
+        from models.algorithm import result_stress
         lst=request.form
         lst=list(lst.values())
         res_lst=[]
         for i in lst:
             res_lst.append(int(i))
-        res=result(res_lst)
+        res=result_stress(res_lst)
         Email=session['Email']
         date=datetime.datetime.now().date()
         session['strs-res']=res
@@ -150,14 +155,14 @@ def que2():
 @app.route("/anxiety",methods=['post']) #anxiety result route
 def anxiety():
     if 'Email' in session:
-        from models.anxiety import result
+        from models.algorithm import result_anxiety
         lst=request.form
         lst=list(lst.values())
         res_lst=[]
         for i in lst:
             res_lst.append(int(i))
-        res=result(res_lst)
-
+        res=result_anxiety(res_lst)
+        session['anx-res']=res
         Email=session['Email']
         date=datetime.datetime.now().date()
         cursor.execute("insert into anxiety(email,date,result) values(%s,%s,%s)",(Email,date,res))
@@ -174,14 +179,15 @@ def que3():
 @app.route("/depression",methods=['post'])  #depression result route
 def depression():
     if 'Email' in session:
-        from models.depression import result
+        from models.algorithm import result_depression
         lst=request.form
         lst=list(lst.values())
         res_lst=[]
         for i in lst:
             res_lst.append(int(i))
-        res=result(res_lst)
+        res=result_depression(res_lst)
         Email=session['Email']
+        session['depr-res']=res
         date=datetime.datetime.now().date()
         cursor.execute("insert into depression(email,date,result) values(%s,%s,%s)",(Email,date,res))
         connection.commit()
@@ -216,25 +222,30 @@ def profile_update():
 
 @app.route("/results")
 def results():
-    Email=session['Email']
-    date=datetime.datetime.now().date()
-    date="2023-03-10"
-    cursor.execute("select * from stress where email=%s",(Email,))
-    stress=cursor.fetchall()
-    cursor.execute("select * from anxiety where email=%s",(Email,))
-    anxiety=cursor.fetchall()
-    cursor.execute("select * from depression where email=%s",(Email,))
-    depression=cursor.fetchall()
-    if stress and depression and anxiety:
-        return render_template('results.html',stress=stress,anxiety=anxiety,depression=depression,zip=zip)
+    if 'Email' in session:
+        Email=session['Email']
+        date=datetime.datetime.now().date()
+        date="2023-03-10"
+        cursor.execute("select * from stress where email=%s",(Email,))
+        stress=cursor.fetchall()
+        cursor.execute("select * from anxiety where email=%s",(Email,))
+        anxiety=cursor.fetchall()
+        cursor.execute("select * from depression where email=%s",(Email,))
+        depression=cursor.fetchall()
+        if stress and depression and anxiety:
+            return render_template('results.html',stress=stress,anxiety=anxiety,depression=depression,zip=zip)
+        else:
+            flash("Please take a test to get result!")
+            return render_template('results.html')
     else:
-        flash("Please take a test to get result!")
-        return render_template('results.html')
+        return redirect('/')
 @app.route("/logout")   #logout route for getting out of the system
 def logout():
     if 'Email' or 'strs-res' in session:
         session.pop('Email',None)
         session.pop('strs-res',None)
+        session.pop('anx-res',None)
+        session.pop('depr-res',None)
         return redirect('/log')
 
 if __name__=="__main__":

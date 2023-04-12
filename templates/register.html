@@ -33,8 +33,8 @@
         <input type="email" class="input-validate" id="email" placeholder="Patient E-mail" name="email" required>
         <label for="mobile" >Patient mobile</label><br>
         <input type="text" min="10" max="10" placeholder="Patient mobile" name="mobile" required>
-        <label for="password">Password</label><br>
-        <input type="password" class="input-validate" min="8" id="password" placeholder="Patient password" name="password" required>
+        <label for="password">Password<span id="pass-msg"></span></label><br>
+        <input type="password" class="input-validate" min="8" id="password" placeholder="Patient password" name="password" onchange="passwordValidate()" required>
         <label for="security">Security Questions</label>
         <select name="security" id="security" class="input-validate">
           <option>Choose Your Question?</option>
@@ -51,6 +51,6 @@
       </div>
     </form>
     
-    <script src="{{url_for('static', filename='js/')}}"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
   </body>
 </html>

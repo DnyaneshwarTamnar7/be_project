@@ -1,12 +1,10 @@
-btn=document.querySelector('#submit')
-btn.disabled=true;
-function validat(){
-    div=document.querySelectorAll('.input-validate');
-    email=div[0].value;
-    password=div[1].value;
-    len=email.length
-    if((email.slice(-4)==='.com') && (password.length>=8)) {
-    btn.disabled=false;
+function passwordValidate() {
+    let password = document.getElementById("password")
+    let msg=document.getElementById("pass-msg")
+    if(password.value.length>8) {
+        
+        msg.innerText=" "
+    }else {
+        msg.innerText="Password should be greate than 8"
     }
 }
-validat()
