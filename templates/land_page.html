@@ -11,13 +11,76 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
     integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
     crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style1.css')}}">
+    <!-- <link rel="stylesheet" href="../static/css/style1.css"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&amp;family=Cinzel:wght@500&amp;family=Roboto:wght@300&amp;family=Poppins:wght@500;600;800&amp;display=swap" rel="stylesheet">
+    <link
+    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    rel="stylesheet"
+  />
     <title>Home of DASS</title>
 </head>
 <body>
         <!-- ==============header menu section starts here============== -->
+<!---
+        <section class="sidebar">
+          <div class="nav-header">
+            <p class="logo">Welcome</p>
+            <i class="bx bx-menu-alt-right btn-menu"></i>
+          </div>
+          <ul class="nav-links">
+            <li>
+              <a href="/profile">
+                <i class='bx bx-user'></i></i>
+                <span class="title">Profile</span>
+              </a>
+              <span class="tooltip">Profile</span>
+            </li>
+            <li>
+              <a href="/home">
+                <i class="bx bx-home-alt-2"></i>
+                <span class="title">Home</span>
+              </a>
+              <span class="tooltip">Home</span>
+            </li>
+            <li>
+              <a href="/results">
+                <i class='bx bx-history'></i>          
+                <span class="title">Past Results</span>
+              </a>
+              <span class="tooltip">Results</span>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-info-circle'></i>
+                <span class="title">About Us</span>
+              </a>
+              <span class="tooltip">Abouts</span>
+            </li>
+            <li>
+              <a href="#">
+                <i class="bx bx-phone-call"></i>
+                <span class="title">Contact Us</span>
+              </a>
+              <span class="tooltip">Contact Us</span>
+            </li>
+        
+            <li>
+              <a href="/logout">
+                <i class='bx bx-log-out'></i>
+                <span class="title">Log out</span>
+              </a>
+              <span class="tooltip">Log out</span>
+            </li>
+            
+          </ul>
+        </section>-->
+
+
+
+
   <section class="header_menu" id="header_menu">
-    <div class="container-fluid px-0 shadow">
+    <div class="container-fluid px-0 shadow" style="background-color: #fff;">
       <nav class="navbar navbar-expand-lg navbar-light bg-light py-3  ">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,23 +88,21 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto">
+          <ul class="navbar-nav mx-auto" style="font-size: 170%;">
             <li class="nav-item active">
-              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/results">Results</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">Contact Us</a>
+              <a class="nav-link" href="#">Contact Us</a>
             </li>
             
           </ul>
           <div class="userpro">
-            <a href="/log" class="btn btn-primary">Login</a>
+            <a href="/log" class="btn btn-primary" style="margin-right: 10px;">Login</a>
           </div>
           <div class="userpro">
             <a href="/new-register" class="btn btn-primary">Sign Up</a>
@@ -51,31 +112,62 @@
       </nav>
     </div>
   </section>
-  <!-- ==============header menu section ends here============== -->
-<div class="test-container">
-  <div class="card" style="width: 28rem;">
-    <div class="tip"><img src="https://www.16personalities.com/static/images/test-header-2.svg"> <div class="text"><div class="title">
-        Complete the Test
-    </div> <div class="subtitle">
-        Be yourself and answer honestly to find out your personality type.
-    </div></div></div>
-  </div>
-  <div class="card" style="width: 28rem;">
-    <div class="tip"><img src="https://www.16personalities.com/static/images/academy/explorers/icons/theory.svg"> <div class="text"><div class="title">
-        View Detailed Results
-    </div> <div class="subtitle">
-        Learn how your personality type influences many areas of your life.
-    </div></div></div>
-  </div>
-  <div class="card" style="width: 28rem;">
-    <div class="tip last"><img src="https://www.16personalities.com/static/images/academy/analysts/exercise.svg"> <div class="text"><div class="title">
-        Unlock Your Potential
-    </div> <div class="subtitle">
-        Grow into the person you want to be with your optional Premium Guides.
-    </div></div></div>
-  </div>
-</div>
 
+  <!-- ==============header menu section ends here============== -->
+
+  <section class="grid">
+    <div class="grid-item">
+      <div class="card">
+        <img class="card-img" src="https://www.16personalities.com/static/images/test-header-2.svg" alt="test" />
+        <div class="card-content">
+          <h1 class="card-header">Complete the Test</h1>
+          <p class="card-text">
+            Be yourself and answer honestly to find out your personality type.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+    <div class="grid-item">
+      <div class="card">
+        <img class="card-img" src="https://www.16personalities.com/static/images/academy/explorers/icons/theory.svg" alt="test" />
+        <div class="card-content">
+          <h1 class="card-header">View Detailed Results</h1>
+          <p class="card-text">
+            Learn how your personality type influences many areas of your life.
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <div class="grid-item">
+      <div class="card">
+        <img class="card-img" src="https://www.16personalities.com/static/images/academy/analysts/exercise.svg" alt="test" />
+        <div class="card-content">
+          <h1 class="card-header">Analyze yourself</h1>
+          <p class="card-text" style="padding-top:.015px;">
+
+          </p>
+          <button class="card-btn">
+            <a href="/log">Take the Test</a>
+            
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer">
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" /></defs>
+      <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+      </g>
+  </svg>
+  </section>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -88,5 +180,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
+
+    <script>
+      const btn_menu = document.querySelector(".btn-menu");
+      const side_bar = document.querySelector(".sidebar");
+
+      btn_menu.addEventListener("click", function () {
+        side_bar.classList.toggle("expand");
+        changebtn();
+      });
+
+      function changebtn() {
+        if (side_bar.classList.contains("expand")) {
+          btn_menu.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else {
+          btn_menu.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+      }
+    </script>
+
 </body>
 </html>

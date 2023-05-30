@@ -2,15 +2,15 @@ from flask import * #importing flask
 import datetime #datetime module
 import bcrypt   #importing hashing algorithm
 import mysql.connector  #mysql connector
-from fpdf import FPDF
+
+import pickle
 # from flask_login import LoginManager
 
 
 app=Flask(__name__) #initializing flask
-pdf=FPDF()
+
 salt=bcrypt.gensalt()   #salt generated for hashing
-# login_manager=LoginManager()    #login manager initialized
-# login_manager.init_app(app)
+
 connection=mysql.connector.connect(host='localhost',database='DASS',user='root',password='4267')    #MySQL connection
 cursor=connection.cursor()
 app.secret_key="lmk"  #session secret key
@@ -38,7 +38,7 @@ def login():
             result=bcrypt.checkpw(password,hash)
             if result:
                 session['Email']=Email
-                return render_template('home.html',name=None)
+                return redirect("/home")
             else:
                 flash("Please Enter Correct login Credentials!")
                 return render_template('login.html')
@@ -57,6 +57,13 @@ def home():
         stress=session['strs-res']
         depression=session['depr-res']
         anxiety=session['anx-res']
+        Email=session['Email']
+        date=datetime.datetime.now().date()
+        cursor.execute("insert into result(email,date,stress,anxiety,depression) values(%s,%s,%s,%s,%s)",(Email,date,stress,anxiety,depression))
+        connection.commit()
+        session.pop('strs-res',None)
+        session.pop('anx-res',None)
+        session.pop('depr-res',None)
         return render_template('home.html',stress=stress,depression=depression,anxiety=anxiety)
     else:
         return render_template('home.html')
@@ -121,7 +128,13 @@ def forg_passwd():
             flash("Please enter correct deatails")
             return redirect("/forget-password")
 
-
+@app.route("/open-que",methods=['post']) #open ended quetion to predict the stress
+def open_que():
+    from models.analysis_model import open_question
+    text=request.form['textarea']
+    res=open_question(text)
+    return render_template('home.html', result=text)
+    
 
 @app.route("/que1") #stress html rotue
 def que1():
@@ -130,18 +143,18 @@ def que1():
 @app.route("/stress",methods=['post'])  #stress test result sotring and displaying
 def stress():
     if 'Email' in session:
-        from models.algorithm import result_stress
+        from models.stress import result
         lst=request.form
         lst=list(lst.values())
         res_lst=[]
         for i in lst:
             res_lst.append(int(i))
-        res=result_stress(res_lst)
+        res=result(res_lst)
         Email=session['Email']
         date=datetime.datetime.now().date()
         session['strs-res']=res
-        cursor.execute("insert into stress(email,date,result) values(%s,%s,%s)",(Email,date,res))
-        connection.commit()
+        # cursor.execute("insert into stress(email,date,result) values(%s,%s,%s)",(Email,date,res))
+        # connection.commit()
         stress_result=session['strs-res']
         return redirect('/que2')
     else:
@@ -155,18 +168,18 @@ def que2():
 @app.route("/anxiety",methods=['post']) #anxiety result route
 def anxiety():
     if 'Email' in session:
-        from models.algorithm import result_anxiety
+        from models.anxiety import result
         lst=request.form
         lst=list(lst.values())
         res_lst=[]
         for i in lst:
             res_lst.append(int(i))
-        res=result_anxiety(res_lst)
+        res=result(res_lst)
         session['anx-res']=res
         Email=session['Email']
         date=datetime.datetime.now().date()
-        cursor.execute("insert into anxiety(email,date,result) values(%s,%s,%s)",(Email,date,res))
-        connection.commit()
+        # cursor.execute("insert into anxiety(email,date,result) values(%s,%s,%s)",(Email,date,res))
+        # connection.commit()
         return redirect('/que3')
     else:
         flash("Please login into your account")
@@ -179,18 +192,18 @@ def que3():
 @app.route("/depression",methods=['post'])  #depression result route
 def depression():
     if 'Email' in session:
-        from models.algorithm import result_depression
+        from models.depression import result
         lst=request.form
         lst=list(lst.values())
         res_lst=[]
         for i in lst:
             res_lst.append(int(i))
-        res=result_depression(res_lst)
+        res=result(res_lst)
         Email=session['Email']
         session['depr-res']=res
         date=datetime.datetime.now().date()
-        cursor.execute("insert into depression(email,date,result) values(%s,%s,%s)",(Email,date,res))
-        connection.commit()
+        # cursor.execute("insert into depression(email,date,result) values(%s,%s,%s)",(Email,date,res))
+        # connection.commit()
         return redirect('/home')
     else:
         flash("Please login into your account")
@@ -226,14 +239,16 @@ def results():
         Email=session['Email']
         date=datetime.datetime.now().date()
         date="2023-03-10"
-        cursor.execute("select * from stress where email=%s",(Email,))
-        stress=cursor.fetchall()
-        cursor.execute("select * from anxiety where email=%s",(Email,))
-        anxiety=cursor.fetchall()
-        cursor.execute("select * from depression where email=%s",(Email,))
-        depression=cursor.fetchall()
-        if stress and depression and anxiety:
-            return render_template('results.html',stress=stress,anxiety=anxiety,depression=depression,zip=zip)
+        # cursor.execute("select * from stress where email=%s",(Email,))
+        # stress=cursor.fetchall()
+        # cursor.execute("select * from anxiety where email=%s",(Email,))
+        # anxiety=cursor.fetchall()
+        # cursor.execute("select * from depression where email=%s",(Email,))
+        # depression=cursor.fetchall()
+        cursor.execute("select * from result where email=%s",(Email,))
+        result=cursor.fetchall()
+        if result:
+            return render_template('results.html',result=result,zip=zip)
         else:
             flash("Please take a test to get result!")
             return render_template('results.html')
@@ -248,5 +263,5 @@ def logout():
         session.pop('depr-res',None)
         return redirect('/log')
 
-if __name__=="__main__":
-    app.run(debug=True)
+if __name__=="__main__": 
+    app.run(debug=True, port=8000)

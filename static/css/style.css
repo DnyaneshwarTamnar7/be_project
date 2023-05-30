@@ -167,9 +167,10 @@
     }
   }
 .test-container {
-  padding-top: 100px;
+  margin-left: 70px;
+  padding-top: 5s0px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
 }
 
@@ -243,10 +244,35 @@ option{
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(25px);
-  margin: auto;
   margin-top: 80px;
-  max-width: 100%;
+  max-width: 80%;
+  
 }
+
+.form-floating {
+  color: #fff;
+  background: transparent ;
+  border: 0.6px solid rgb(255, 253, 253);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(25px);
+  margin-left:500px;
+  margin-top: 80px;
+  max-width: 500px;
+}
+
+#floatingTextarea {
+  color: #fff;
+  background: transparent ;
+  text-align: center;
+}
+
+#result {
+  color: #fff;
+  text-align: center;
+  font-size: large;
+}
+
 p{
   padding-top: 2%;
 }

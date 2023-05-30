@@ -6,7 +6,7 @@ def result_anxiety(lst):
 
     #reading anxiety dataset using pandas
     df=pd.read_csv("./datasets/anxiety.csv")
-    x=df.drop(['Score','Result'],axis=1)
+    x=df.drop(['Result'],axis=1)
     y=df['Result']
 
     #importing train_test_split model to split dataset in training and testing part
@@ -29,7 +29,7 @@ def result_depression(lst):
 
     #reading depression dataset using pandas
     df=pd.read_csv("./datasets/depression.csv")
-    x=df.drop(['Score','Result'],axis=1)
+    x=df.drop(['Result'],axis=1)
     y=df['Result']
 
     #importing train_test_split model to split dataset in training and testing part
@@ -50,7 +50,7 @@ def result_stress(lst):
 
     #reading stress dataset using pandas
     df=pd.read_csv("./datasets/stress.csv")
-    x=df.drop(['Score','Result'],axis=1)
+    x=df.drop(['Result'],axis=1)
     y=df['Result']
 
     #importing train_test_split model to split dataset in training and testing part

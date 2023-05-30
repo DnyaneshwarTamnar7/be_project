@@ -76,20 +76,22 @@
   </section>
 
       
-    {% if stress and anxiety and depression %}
+    {% if result %}
     <table>
         <tr>
+          <th>Email</th>
             <th>Date</th>
             <th>Stress</th>
             <th>Anxiety</th>
             <th>Depression</th>
         </tr>
-        {% for i,j,k in zip(stress,anxiety,depression) %}
+        {% for i in result %}
         <tr>
             <td>{{i[1]}}</td>
+            <td>{{i[0]}}</td>
             <td>{{i[2]}}</td>
-            <td>{{j[2]}}</td>
-            <td>{{k[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
         </tr>
         {% endfor %}
     </table>

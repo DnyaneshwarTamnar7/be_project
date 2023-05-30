@@ -77,20 +77,20 @@
         </section>
   <!-- ==============header menu section ends here============== -->
 <div class="test-container">
-  <div class="card" style="width: 28rem;">
+  <div class="card" style="width: 22rem;">
     <div class="card-body">
       <a href="/que1" class="btn btn-primary">Stress Test</a>
       <p class="card-text">Current Test Result: {{stress}}</p>
     </div>
   </div>
-  <div class="card" style="width: 28rem;">
+  <div class="card" style="width: 22rem;">
     <div class="card-body">
       <a href="/que2" class="btn btn-primary">Anxiety Test</a>
       <p class="card-text">Current Test Result: {{anxiety}}</p>
 
     </div>
   </div>
-  <div class="card" style="width: 28rem;">
+  <div class="card" style="width: 22rem;">
     <div class="card-body">
       <a href="/que3" class="btn btn-primary">Depression Test</a>
       <p class="card-text">Current Test Result: {{depression}}</p>
@@ -98,6 +98,19 @@
     </div>
   </div>
 </div>
+<form action="/open-que" method="post">
+<div class="form-floating">
+  <label for="floatingTextarea" id="floatingTextarea">What is going in your mind?What you thunking now?</label>
+  <textarea class="form-control" name="textarea" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+  <div class="sh-result">
+    <input type="submit" class="result" value="Show Result">
+  </div>
+  <div>
+    <p id="result">{{result}}</p>
+  </div>
+</div>
+
+</form>
 
 
     <!-- Optional JavaScript -->
