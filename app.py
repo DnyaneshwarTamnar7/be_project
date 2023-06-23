@@ -44,7 +44,7 @@ def login():
                 return render_template('login.html')
         else:
             flash("Please Register as a new user!")
-            return redirect("/")    #regiter as new user
+            return redirect("/new-register")    #regiter as new user
         
 
 @app.route("/") #registeration route for rendering registration page
@@ -93,7 +93,7 @@ def register():
         cursor.execute("insert into user_security(email,question,answer) values(%s,%s,%s)",(Email,question,ans))
         if(len(request.form['mobile'])!=10):
             flash("Please enter valid mobile number!")
-            return redirect('/')
+            return redirect('/new-register')
         password=request.form['password'].encode('utf-8')
        # if(for i in ['!','@','#','$','%','&','*','^'] if i in password return True):
         Password=bcrypt.hashpw(password,salt)
@@ -131,8 +131,9 @@ def forg_passwd():
 @app.route("/open-que",methods=['post']) #open ended quetion to predict the stress
 def open_que():
     from models.analysis_model import open_question
+    analysis_model = "cardiffnlp/twitter-roberta-base-sentiment"
     text=request.form['textarea']
-    res=open_question(text)
+    res=open_question(text,analysis_model)
     return render_template('home.html', result=text)
     
 
@@ -247,8 +248,11 @@ def results():
         # depression=cursor.fetchall()
         cursor.execute("select * from result where email=%s",(Email,))
         result=cursor.fetchall()
+        cursor.execute("select * from user where email=%s",(Email,))
+        result_user=cursor.fetchall()
+        
         if result:
-            return render_template('results.html',result=result,zip=zip)
+            return render_template('results.html',result=result,result_user=result_user[0])
         else:
             flash("Please take a test to get result!")
             return render_template('results.html')

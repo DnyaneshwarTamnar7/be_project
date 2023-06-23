@@ -76,10 +76,20 @@
   </section>
 
       
-    {% if result %}
+    {% if result and result_user %}
+    <div id="info-div">
+      <p id="info">Name : {{result_user[0]}}</p>
+      <p id="info">Age : {{result_user[1]}}</p>
+    </div>
+    <div id="info-div">
+      <p id="info">Email : {{result_user[2]}}</p>
+      <p id="info">Mobile No. : {{result_user[3]}}</p>
+    </div>
+    
+    
     <table>
         <tr>
-          <th>Email</th>
+          <!-- <th>Email</th> -->
             <th>Date</th>
             <th>Stress</th>
             <th>Anxiety</th>
@@ -87,8 +97,8 @@
         </tr>
         {% for i in result %}
         <tr>
+            <!-- <td>{{i[0]}}</td> -->
             <td>{{i[1]}}</td>
-            <td>{{i[0]}}</td>
             <td>{{i[2]}}</td>
             <td>{{i[3]}}</td>
             <td>{{i[4]}}</td>

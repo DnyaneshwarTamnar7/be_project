@@ -37,6 +37,14 @@
     background-image: url('https://media4.giphy.com/media/PjJ1cLHqLEveXysGDB/giphy.gif?cid=ecf05e47oa6dkf0ztd6ba7uq14slw4fk3wjhbyot4rst5rl0&rid=giphy.gif&ct=g');
     background-size: 100%;
   }
+  #info-div {
+    margin-top:25px;
+  }
+  #info{
+    color: #fff;
+    margin-left: 200px;
+    display: inline;
+  }
   
   .container {
     padding: 20px;

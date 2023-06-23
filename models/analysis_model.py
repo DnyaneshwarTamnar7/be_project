@@ -1,4 +1,4 @@
-def open_question(text):
+def open_question(text,analysis_model):
     from transformers import AutoTokenizer, AutoModelForSequenceClassification
     from scipy.special import softmax
     # text = "I woke up fresh today"
@@ -14,7 +14,7 @@ def open_question(text):
     # print(text_proc)
 
     #load the model and tokenizer
-    analysis_model = "cardiffnlp/twitter-roberta-base-sentiment"
+    
 
     model = AutoModelForSequenceClassification.from_pretrained(analysis_model)
     tokenizer = AutoTokenizer.from_pretrained(analysis_model)
